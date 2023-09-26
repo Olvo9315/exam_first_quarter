@@ -1,7 +1,7 @@
 ﻿// Написать программу, которая из имеющегося массива строк формирует новый массив из строк, длина которых меньше, либо равна 3 символам. 
 //Первоначальный массив можно ввести с клавиатуры, либо задать на старте выполнения алгоритма. 
 
-//Console.Clear();
+Console.Clear();
 
 int GetElementsNumber(string messsage, string errorMessage)
 {
@@ -37,6 +37,20 @@ void PrintArray(string[] array, string message)
     Console.WriteLine("]");
 }
 
+string[] GetFilteredArray(string[] array, int newLength)
+{
+    string[] newArray = new string[newLength];
+    int i = 0;
+    foreach(string element in array)
+    {
+        if (element.Length <= 3)
+        {
+            newArray[i] = element;
+            i++;
+        }
+    }
+    return newArray;
+}
 
 /// 
 void MainPart()
@@ -48,8 +62,13 @@ void MainPart()
     {
         string element = GetElement($"Enter {i + 1} element: ");
         array[i] = element;
+        if (element.Length <= 3)
+        {
+            k++;
+        }
     }
     PrintArray(array, "Your array: ");
+    PrintArray(GetFilteredArray(array, k), "Your filtered array: ");
 }
 
 MainPart();
